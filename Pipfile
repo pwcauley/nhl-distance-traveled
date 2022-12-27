@@ -4,7 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-
+geopy = "*"
+pandas = "*"
+numpy = "*"
+haversine = "*"
+matplotlib = "*"
+streamlit = "*"
+mpl_toolkits = "*"
 
 [dev-packages]
 
