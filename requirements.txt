@@ -4,3 +4,4 @@ numpy
 haversine 
 matplotlib 
 streamlit  
+lxml
