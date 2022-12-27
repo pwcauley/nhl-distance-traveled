@@ -139,10 +139,12 @@ def make_distance_plot(df,year,my_team):
                 frameon=False) )
         if team == my_team:
             tcolor = 'red'
+            fsize = '20'
         else:
             tcolor = 'black'
+            fsize = 15
         ax.text(i+ioff, t_off, team, rotation = 45, horizontalalignment = 'right',
-               verticalalignment = 'top', fontsize = 15, fontname='Arial', color = tcolor)
+               verticalalignment = 'top', fontsize = fsize, fontname='Arial', color = tcolor)
     
     return fig    
     #fig.savefig('nhl_distance_traveled_2023.png',bbox_inches = 'tight')
