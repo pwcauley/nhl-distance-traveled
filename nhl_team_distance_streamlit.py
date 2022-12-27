@@ -91,7 +91,7 @@ def calculate_distance(df_sched,df_teams):
 
     return df_teams
 
-def make_distance_plot(df,year):
+def make_distance_plot(df,year,my_team):
     
     nteams = len(df)
     
@@ -137,12 +137,17 @@ def make_distance_plot(df,year):
         ax.add_artist(AnnotationBbox(
                 OffsetImage(image,zoom=im_zoom), (i , df.iloc[i]['distance_traveled'] + doff),
                 frameon=False) )
+        if team == my_team:
+            tcolor = 'red'
+        else:
+            tcolor = 'black'
         ax.text(i+ioff, t_off, team, rotation = 45, horizontalalignment = 'right',
-               verticalalignment = 'top', fontsize = 15, fontname='Arial')
+               verticalalignment = 'top', fontsize = 15, fontname='Arial', color = tcolor)
     
     return fig    
     #fig.savefig('nhl_distance_traveled_2023.png',bbox_inches = 'tight')
 
+#Now begin Streamlit implementation
 st.title('NHL team distance traveled')
 st.subheader('Ever wondered how far your favorite NHL team travels in a season?'+ 
              'Just enter the year that the season of interest ends in (ex. 2023'+
@@ -162,7 +167,7 @@ if year:
             
                 df_teams = calculate_distance(df_sched,df)
                 distance_diff = int(df_teams['distance_traveled'].max() - df_teams['distance_traveled'].min())
-                distance_fig = make_distance_plot(df_teams,year)
+                distance_fig = make_distance_plot(df_teams,year,team_of_interest)
                 st.pyplot(distance_fig)
                 st.markdown('Average team distance traveled was '+str(int(df_teams['distance_traveled'].mean()))+' miles.')
                 st.markdown('The team that traveled the most traveled '+str(distance_diff)+' miles more than the team that traveled the least.')
