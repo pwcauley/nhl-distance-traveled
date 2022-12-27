@@ -3,5 +3,4 @@ pandas
 numpy 
 haversine 
 matplotlib 
-streamlit 
-mpl_toolkits 
+streamlit  
