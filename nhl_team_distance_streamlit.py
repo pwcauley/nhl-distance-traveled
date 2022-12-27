@@ -77,12 +77,12 @@ def calculate_distance(df_sched,df_teams):
         df_teams.loc[df_teams['team'] == home_team,'distance_traveled'] = df_teams.loc[df_teams['team'] == home_team,'distance_traveled'].iloc[0]+distance_home_team        
             
         #Update df with new values
-        df_teams.loc[df_teams['team'] == home_team,['last_team_played','last_status']] = [visiting_team, 'home']
+        #df_teams.loc[df_teams['team'] == home_team,['last_team_played','last_status']] = [visiting_team, 'home']
         df_teams.loc[df_teams['team'] == home_team,['last_latitude','last_longitude']] = [end_location[0],end_location[1]]
-        df_teams.loc[df_teams['team'] == visiting_team,['last_team_played','last_status']] = [home_team, 'away']
+        #df_teams.loc[df_teams['team'] == visiting_team,['last_team_played','last_status']] = [home_team, 'away']
         df_teams.loc[df_teams['team'] == visiting_team,['last_latitude','last_longitude']] = [end_location[0],end_location[1]]
-        df_teams.loc[df_teams['team'] == home_team,'date_previous_game'] = df_sched.iloc[i]['Date']
-        df_teams.loc[df_teams['team'] == visiting_team,'date_previous_game'] = df_sched.iloc[i]['Date']
+        #df_teams.loc[df_teams['team'] == home_team,'date_previous_game'] = df_sched.iloc[i]['Date']
+        #df_teams.loc[df_teams['team'] == visiting_team,'date_previous_game'] = df_sched.iloc[i]['Date']
     
     #Remove any teams that didn't exist at the time and then sort according to distance traveled.
     #We eliminate teams that didn't exist by removing any teams that had no distance traveled
