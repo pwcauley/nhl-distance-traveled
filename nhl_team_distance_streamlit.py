@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-NAdd Favorite Team input option and some summary statistics (average distance,
-                                                             min, max)
+NEED TO ADD COMMENTS
 """
 
 #Get some packages
@@ -159,14 +158,17 @@ st.caption('Only years after 1993 are valid!')
 if year:
     if (float(year) > 1993) and year != '2005':
 
+        @st.cache
         df = pd.read_pickle("nhl_team_location_data.pkl")
         df_sched = get_schedule(year)
         team_series = np.insert(np.sort(df_sched['Visitor'].unique()),0,['(Select an option)','None'])
-        team_of_interest = st.selectbox('Choose a team of interest (or None):',(team_series))        
+        team_of_interest = st.selectbox('Choose a team of interest (or None):',(team_series))
+        st.caption('Selected team will be highlighted in red on the distance chart.')
 
         if team_of_interest != '(Select an option)':
             with st.spinner('Calculating distances...'):
             
+                @st.cache
                 df_teams = calculate_distance(df_sched,df)
                 distance_diff = int(df_teams['distance_traveled'].max() - df_teams['distance_traveled'].min())
                 distance_fig = make_distance_plot(df_teams,year,team_of_interest)
