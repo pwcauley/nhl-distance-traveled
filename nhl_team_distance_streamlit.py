@@ -41,6 +41,7 @@ def get_schedule(year):
         
     return df_sched
 
+#Cache the distance function so it speeds up if run on the same year twice
 @st.cache
 def calculate_distance(df_sched,df_teams):
 
@@ -93,7 +94,9 @@ def calculate_distance(df_sched,df_teams):
 
 def make_distance_plot(df,year,my_team):
     
+    #Set a couple of variables
     nteams = len(df)
+    fname = 'Arial
     
     #Make distance bar plot.
     cmap = matplotlib.cm.get_cmap('bone')
@@ -104,10 +107,10 @@ def make_distance_plot(df,year,my_team):
     im1 = plt.bar(np.linspace(0,nteams-1,num = len(df['team'])),df['distance_traveled'],
             label = df['team'],color = cmap(norm(df['longitude'])),width = 0.7, edgecolor = 'gray')
     plt.xticks([])
-    plt.title('NHL team distance traveled '+str(int(year)-1)+'-'+year,fontsize = 25, fontname='Arial')
+    plt.title('NHL team distance traveled '+str(int(year)-1)+'-'+year,fontsize = 25, fontname=fname)
     plt.gca().spines['right'].set_visible(False)
     plt.gca().spines['top'].set_visible(False)
-    ax.set_ylabel('Distance traveled (miles)',fontsize=30,fontname='Arial')
+    ax.set_ylabel('Distance traveled (miles)',fontsize=30,fontname=fname)
     ax.set_xlim([-1,nteams+1])
     ymax = max(df['distance_traveled'])*1.1
     ax.set_ylim([0,ymax])
@@ -116,12 +119,12 @@ def make_distance_plot(df,year,my_team):
         tick.set_fontname('Arial')
     
     axins1 = ax.inset_axes([.55,.85,.35,.05])
-    axins1.text(0, 1.12, 'West',fontsize=20,fontname='Arial')
-    axins1.text(1.0, 1.12, 'East',fontsize=20,horizontalalignment = 'right',fontname='Arial')
+    axins1.text(0, 1.12, 'West',fontsize=20,fontname=fname)
+    axins1.text(1.0, 1.12, 'East',fontsize=20,horizontalalignment = 'right',fontname=fname)
     cbar = fig.colorbar(matplotlib.cm.ScalarMappable(cmap=cmap), cax=axins1, 
                  orientation="horizontal")
     cbar.set_ticks([])
-    cbar.set_label(label = 'Longitude',size=25,fontname='Arial')
+    cbar.set_label(label = 'Longitude',size=25,fontname=fname)
     
     #Insert team logos at top of each bar
     t_off = -.01*ymax
@@ -144,7 +147,7 @@ def make_distance_plot(df,year,my_team):
             tcolor = 'black'
             fsize = 15
         ax.text(i+ioff, t_off, team, rotation = 45, horizontalalignment = 'right',
-               verticalalignment = 'top', fontsize = fsize, fontname='Arial', color = tcolor)
+               verticalalignment = 'top', fontsize = fsize, fontname=fname, color = tcolor)
     
     return fig    
     
