@@ -41,6 +41,7 @@ def get_schedule(year):
         
     return df_sched
 
+@st.cache
 def calculate_distance(df_sched,df_teams):
 
     #Instantiate locator in case it's needed
@@ -146,8 +147,7 @@ def make_distance_plot(df,year,my_team):
                verticalalignment = 'top', fontsize = fsize, fontname='Arial', color = tcolor)
     
     return fig    
-    #fig.savefig('nhl_distance_traveled_2023.png',bbox_inches = 'tight')
-
+    
 #Now begin Streamlit implementation
 st.title('NHL team distance traveled')
 st.subheader('Ever wondered how far your favorite NHL team travels in a season?'+ 
@@ -157,8 +157,7 @@ year = st.text_input("Enter the season you want to look at:",value='')
 st.caption('Only years after 1993 are valid!')
 if year:
     if (float(year) > 1993) and year != '2005':
-
-        @st.cache
+        
         df = pd.read_pickle("nhl_team_location_data.pkl")
         df_sched = get_schedule(year)
         team_series = np.insert(np.sort(df_sched['Visitor'].unique()),0,['(Select an option)','None'])
@@ -168,7 +167,6 @@ if year:
         if team_of_interest != '(Select an option)':
             with st.spinner('Calculating distances...'):
             
-                @st.cache
                 df_teams = calculate_distance(df_sched,df)
                 distance_diff = int(df_teams['distance_traveled'].max() - df_teams['distance_traveled'].min())
                 distance_fig = make_distance_plot(df_teams,year,team_of_interest)
