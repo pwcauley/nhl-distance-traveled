@@ -96,7 +96,7 @@ def make_distance_plot(df,year,my_team):
     
     #Set a couple of variables
     nteams = len(df)
-    fname = 'Arial
+    fname = 'Arial'
     
     #Make distance bar plot.
     cmap = matplotlib.cm.get_cmap('bone')
@@ -149,15 +149,17 @@ def make_distance_plot(df,year,my_team):
         ax.text(i+ioff, t_off, team, rotation = 45, horizontalalignment = 'right',
                verticalalignment = 'top', fontsize = fsize, fontname=fname, color = tcolor)
     
-    return fig    
+    fig.savefig('nhl_distance_traveled.png',bbox_inches = 'tight')
+    
+    return #fig    
     
 #Now begin Streamlit implementation
 st.title('NHL team distance traveled')
-st.subheader('Ever wondered how far your favorite NHL team travels in a season?'+ 
-             'Just enter the year that the season of interest ends in (ex. 2023'+
-             ' for the current 2022-2023 season) and check the resulting chart. For'+
+st.subheader('Ever wondered how far your favorite NHL team travels in a season?')
+st.markdown('Just enter the year that the season of interest ends in (ex. 2023'+
+             ' for the current 2022-2023 season) and check the resulting chart. For '+
             'information on the assumptions and a Jupyter Notebook version check out'+
-            'the github page: https://github.com/pwcauley/nhl-distance-traveled/')
+            'the Github page: https://github.com/pwcauley/nhl-distance-traveled/')
 year = st.text_input("Enter the season you want to look at:",value='')
 st.caption('Only years after 1993 are valid!')
 if year:
@@ -175,12 +177,12 @@ if year:
                 df_teams = calculate_distance(df_sched,df)
                 distance_diff = int(df_teams['distance_traveled'].max() - df_teams['distance_traveled'].min())
                 distance_fig = make_distance_plot(df_teams,year,team_of_interest)
-                st.pyplot(distance_fig)
-                st.markdown('Average team distance traveled was '+str(int(df_teams['distance_traveled'].mean()))+' miles.')
-                st.markdown('The team that traveled the most traveled '+str(distance_diff)+' miles more than the team that traveled the least.')
+                st.image('nhl_distance_traveled.png')
+                st.markdown('-Average team distance traveled was '+str(int(df_teams['distance_traveled'].mean()))+' miles.')
+                st.markdown('-The team that traveled the most traveled '+str(distance_diff)+' miles more than the team that traveled the least.')
                 if team_of_interest != 'None':
                     toi_distance = int(df_teams[df_teams['team'] == team_of_interest]['distance_traveled'])
-                    st.markdown('The <span style="color:Red;">'+team_of_interest+'</span> traveled '+str(toi_distance)+' miles.',unsafe_allow_html=True)
+                    st.markdown('-The <span style="color:Red;">'+team_of_interest+'</span> traveled '+str(toi_distance)+' miles.',unsafe_allow_html=True)
 
     elif year == '2005':
         st.markdown('Unfortunately, there was a lockout during 2004 - 2005 and the '+
