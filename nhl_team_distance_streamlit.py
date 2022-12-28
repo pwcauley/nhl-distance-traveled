@@ -158,7 +158,7 @@ st.title('NHL team distance traveled')
 st.subheader('Ever wondered how far your favorite NHL team travels in a season?')
 st.markdown('Just enter the year that the season of interest ends in (ex. 2023'+
              ' for the current 2022-2023 season) and check the resulting chart. For '+
-            'information on the assumptions and a Jupyter Notebook version check out'+
+            'information on the assumptions and a Jupyter Notebook version check out '+
             'the Github page: https://github.com/pwcauley/nhl-distance-traveled/')
 year = st.text_input("Enter the season you want to look at:",value='')
 st.caption('Only years after 1993 are valid!')
