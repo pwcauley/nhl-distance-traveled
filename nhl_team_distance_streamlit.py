@@ -175,7 +175,7 @@ if year:
                 st.markdown('The team that traveled the most traveled '+str(distance_diff)+' miles more than the team that traveled the least.')
                 if team_of_interest != 'None':
                     toi_distance = int(df_teams[df_teams['team'] == team_of_interest]['distance_traveled'])
-                    st.markdown('The <p style="color:Red;">'+team_of_interest+'</p> traveled '+str(toi_distance)+' miles.',unsafe_allow_html=True)
+                    st.markdown('The <body style="color:Red;">'+team_of_interest+'</body> traveled '+str(toi_distance)+' miles.',unsafe_allow_html=True)
 
     elif year == '2005':
         st.markdown('Unfortunately, there was a lockout during 2004 - 2005 and the '+
