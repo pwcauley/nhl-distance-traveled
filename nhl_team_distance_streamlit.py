@@ -78,12 +78,8 @@ def calculate_distance(df_sched,df_teams):
         df_teams.loc[df_teams['team'] == home_team,'distance_traveled'] = df_teams.loc[df_teams['team'] == home_team,'distance_traveled'].iloc[0]+distance_home_team        
             
         #Update df with new values
-        #df_teams.loc[df_teams['team'] == home_team,['last_team_played','last_status']] = [visiting_team, 'home']
         df_teams.loc[df_teams['team'] == home_team,['last_latitude','last_longitude']] = [end_location[0],end_location[1]]
-        #df_teams.loc[df_teams['team'] == visiting_team,['last_team_played','last_status']] = [home_team, 'away']
         df_teams.loc[df_teams['team'] == visiting_team,['last_latitude','last_longitude']] = [end_location[0],end_location[1]]
-        #df_teams.loc[df_teams['team'] == home_team,'date_previous_game'] = df_sched.iloc[i]['Date']
-        #df_teams.loc[df_teams['team'] == visiting_team,'date_previous_game'] = df_sched.iloc[i]['Date']
     
     #Remove any teams that didn't exist at the time and then sort according to distance traveled.
     #We eliminate teams that didn't exist by removing any teams that had no distance traveled
@@ -181,12 +177,15 @@ if year:
                 st.markdown('* Average team distance traveled was '+str(int(df_teams['distance_traveled'].mean()))+' miles.')
                 st.markdown('* The team that traveled the most traveled '+str(distance_diff)+' miles more than the team that traveled the least.')
                 if team_of_interest != 'None':
+                    toi_index = pd.Index(df_teams['team']).get_loc(team_of_interest)
                     toi_distance = int(df_teams[df_teams['team'] == team_of_interest]['distance_traveled'])
-                    st.markdown('* The <span style="color:Red;">'+team_of_interest+'</span> traveled '+str(toi_distance)+' miles.',unsafe_allow_html=True)
+                    toi_percent = int((len(df_teams)-(toi_index+1))*100/len(df_teams))
+                    st.markdown('* The <span style="color:Red;">'+team_of_interest+'</span> traveled '+str(toi_distance)+' miles,'
+                                +' which is more than '+toi_percent+'% of teams that season.',unsafe_allow_html=True)
 
     elif year == '2005':
         st.markdown('Unfortunately, there was a lockout during 2004 - 2005 and the '+
                 'entire season and postseason were canceled. Try another year!')
     else:
-        st.markdown('Only years after 1993 are valid! Sorry, Minnesota North Stars...')
+        st.markdown('Only years after 1993 are valid! Sorry, Minnesota North Stars fans...')
     
