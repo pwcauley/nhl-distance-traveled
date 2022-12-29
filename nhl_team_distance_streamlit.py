@@ -170,8 +170,13 @@ if year:
         if team_of_interest != '(Select an option)':
             with st.spinner('Calculating distances...'):
             
+                #Calculates distance and returns a dataframe
                 df_teams = calculate_distance(df_sched,df)
+                
+                #Compute some interesting numbers
                 distance_diff = int(df_teams['distance_traveled'].max() - df_teams['distance_traveled'].min())
+                
+                #Make distance bar chart
                 distance_fig = make_distance_plot(df_teams,year,team_of_interest)
                 st.image('nhl_distance_traveled.png')
                 st.markdown('* Average team distance traveled was '+str(int(df_teams['distance_traveled'].mean()))+' miles.')
