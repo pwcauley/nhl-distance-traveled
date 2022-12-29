@@ -178,11 +178,11 @@ if year:
                 distance_diff = int(df_teams['distance_traveled'].max() - df_teams['distance_traveled'].min())
                 distance_fig = make_distance_plot(df_teams,year,team_of_interest)
                 st.image('nhl_distance_traveled.png')
-                st.markdown('-Average team distance traveled was '+str(int(df_teams['distance_traveled'].mean()))+' miles.')
-                st.markdown('-The team that traveled the most traveled '+str(distance_diff)+' miles more than the team that traveled the least.')
+                st.markdown('* Average team distance traveled was '+str(int(df_teams['distance_traveled'].mean()))+' miles.')
+                st.markdown('* The team that traveled the most traveled '+str(distance_diff)+' miles more than the team that traveled the least.')
                 if team_of_interest != 'None':
                     toi_distance = int(df_teams[df_teams['team'] == team_of_interest]['distance_traveled'])
-                    st.markdown('-The <span style="color:Red;">'+team_of_interest+'</span> traveled '+str(toi_distance)+' miles.',unsafe_allow_html=True)
+                    st.markdown('* The <span style="color:Red;">'+team_of_interest+'</span> traveled '+str(toi_distance)+' miles.',unsafe_allow_html=True)
 
     elif year == '2005':
         st.markdown('Unfortunately, there was a lockout during 2004 - 2005 and the '+
