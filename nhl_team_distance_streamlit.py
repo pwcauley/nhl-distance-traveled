@@ -178,7 +178,7 @@ if year:
                 st.markdown('* The team that traveled the most traveled '+str(distance_diff)+' miles more than the team that traveled the least.')
                 if team_of_interest != 'None':
                     toi_index = pd.Index(df_teams['team']).get_loc(team_of_interest)
-                    toi_distance = int(df_teams[df_teams['team'] == team_of_interest]['distan(ce_traveled'])
+                    toi_distance = int(df_teams[df_teams['team'] == team_of_interest]['distance_traveled'])
                     toi_percent = str(int((len(df_teams)-(toi_index+1))*100/len(df_teams)))
                     toi_text = '* The <span style="color:Red;">'+team_of_interest+'</span> traveled '+str(toi_distance)+' miles, which is more than '+toi_percent+'\% of teams that season.'
                     st.markdown(toi_text,unsafe_allow_html=True)
