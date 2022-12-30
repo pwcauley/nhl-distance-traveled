@@ -5,6 +5,7 @@ NEED TO ADD COMMENTS
 
 #Get some packages
 import streamlit as st
+import datetime
 import geopy
 import pandas as pd
 import numpy as np
@@ -158,8 +159,11 @@ st.markdown('Just enter the year that the season of interest ends in (ex. 2023'+
             'the Github page: https://github.com/pwcauley/nhl-distance-traveled/')
 year = st.text_input("Enter the season you want to look at:",value='')
 st.caption('Only years after 1993 are valid!')
+current_year = datetime.date.today().year
+
+#Begin distance calculations and figure generation
 if year:
-    if (float(year) > 1993) and year != '2005':
+    if (float(year) > 1993) and (float(year) <= current_year) and year != '2005':
         
         df = pd.read_pickle("nhl_team_location_data.pkl")
         df_sched = get_schedule(year)
