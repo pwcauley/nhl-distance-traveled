@@ -9,6 +9,7 @@ import datetime
 import geopy
 import pandas as pd
 import numpy as np
+import mplcursors
 from haversine import haversine,Unit
 import matplotlib.pyplot as plt
 import matplotlib
@@ -149,6 +150,15 @@ def make_distance_plot(df,year,my_team):
     #fig.savefig('nhl_distance_traveled.png',bbox_inches = 'tight')
     
     return fig    
+
+#Define some hover over stuff
+cursor = mplcursors.cursor(hover=mplcursors.HoverMode.Transient)
+@cursor.connect("add")
+def on_add(sel):
+    x, y, width, height = sel.artist[sel.index].get_bbox().bounds
+    sel.annotation.set(text=f"{x+width/2}: {height}",
+                       position=(0, 20), anncoords="offset points")
+    sel.annotation.xy = (x + width / 2, y + height)
     
 #Now begin Streamlit implementation
 st.title('NHL team distance traveled')
