@@ -145,9 +145,9 @@ def make_distance_plot(df,year,my_team):
         ax.text(i+ioff, t_off, team, rotation = 45, horizontalalignment = 'right',
                verticalalignment = 'top', fontsize = fsize, fontname=fname, color = tcolor)
     
-    fig.savefig('nhl_distance_traveled.png',bbox_inches = 'tight')
+    #fig.savefig('nhl_distance_traveled.png',bbox_inches = 'tight')
     
-    return #fig    
+    return fig    
     
 #Now begin Streamlit implementation
 st.title('NHL team distance traveled')
@@ -178,7 +178,8 @@ if year:
                 
                 #Make distance bar chart
                 distance_fig = make_distance_plot(df_teams,year,team_of_interest)
-                st.image('nhl_distance_traveled.png')
+                #st.image('nhl_distance_traveled.png')
+                st.pyplot(distance_fig,clear_figure=True)
                 st.markdown('* Average team distance traveled was '+str(int(df_teams['distance_traveled'].mean()))+' miles.')
                 st.markdown('* The team that traveled the most traveled '+str(distance_diff)+' miles more than the team that traveled the least.')
                 if team_of_interest != 'None':
