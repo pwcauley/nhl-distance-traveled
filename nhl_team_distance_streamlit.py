@@ -192,6 +192,8 @@ if year:
     elif year == '2005':
         st.markdown('Unfortunately, there was a lockout during 2004 - 2005 and the '+
                 'entire season and postseason were canceled. Try another year!')
-    else:
+    elif float(year) < 1993:
         st.markdown('Only years after 1993 are valid! Sorry, Minnesota North Stars fans...')
-    
+    else:
+        st.markdown('The future is uncertain, please choose a year from the past or '+
+                    'the current year.')
