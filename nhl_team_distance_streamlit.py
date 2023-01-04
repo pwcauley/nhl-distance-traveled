@@ -9,7 +9,6 @@ import datetime
 import geopy
 import pandas as pd
 import numpy as np
-import mplcursors
 from haversine import haversine,Unit
 import matplotlib.pyplot as plt
 import matplotlib
